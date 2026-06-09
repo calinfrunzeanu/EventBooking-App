@@ -1,0 +1,46 @@
+body {
+    background-color: lightgreen;
+    color: darkgreen;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+   color: darkgreen;
+}
+
+button {
+background-color: green;
+color: white;
+   border: 2px solid darkgreen;
+  padding: 10px;
+ font-size: 16px;
+}
+
+input, select, textarea {
+ border: 2px solid green;
+  background-color: #e6ffe6;
+padding: 5px;
+}
+
+.container {
+   width: 80%;
+  margin: 0 auto;
+    border: 3px solid darkgreen;
+    background-color: white;
+  padding: 20px;
+}
+
+ul {
+  list-style-type: none;
+    padding: 0;
+}
+
+li {
+  display: inline;
+ margin-right: 10px;
+}
+
+.error {
+    color: red;
+  font-weight: bold;
+}

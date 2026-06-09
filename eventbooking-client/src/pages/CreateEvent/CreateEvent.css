@@ -1,0 +1,37 @@
+.create-container {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 400px;
+}
+
+.create-container h2 {
+    font-size: 20px;
+}
+
+.create-container form div {
+  margin-bottom: 10px;
+}
+
+.create-container label {
+    display: block;
+    font-weight: bold;
+}
+
+.create-container input, .create-container select, .create-container textarea {
+  width: 100%;
+  padding: 5px;
+}
+
+.error, .create-container span {
+  color: red;
+  font-size: 12px;
+}
+
+.create-container button {
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
