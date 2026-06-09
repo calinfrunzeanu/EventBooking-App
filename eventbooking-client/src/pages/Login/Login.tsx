@@ -11,11 +11,11 @@ export default function Login() {
    e.preventDefault();
    setEroare('');
 
-     if (email == '') {
+     if (!email) {
        setEroare('Pune email');
         return;
      }
-    if (password == '') {
+    if (!password) {
        setEroare('Pune parola');
      return;
     }
@@ -44,7 +44,7 @@ export default function Login() {
     <div className="container">
       <h2>Logare in cont</h2>
       
-      {eroare != '' ? <p className="error">{eroare}</p> : null}
+      {eroare ? <p className="error">{eroare}</p> : null}
 
        <form onSubmit={handleLogin}>
         <div>

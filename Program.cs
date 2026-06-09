@@ -88,6 +88,25 @@ using (var scope = app.Services.CreateScope())
             await userManager.AddToRoleAsync(admin, "Admin");
         }
     }
+
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    if (!await dbContext.Venues.AnyAsync())
+    {
+        var venue1 = new Venue { Name = "Sala Palatului", Address = "Bucuresti" };
+        var venue2 = new Venue { Name = "Arenele Romane", Address = "Bucuresti" };
+        await dbContext.Venues.AddRangeAsync(venue1, venue2);
+        await dbContext.SaveChangesAsync();
+
+        if (!await dbContext.Events.AnyAsync())
+        {
+            await dbContext.Events.AddRangeAsync(
+                new Event { Title = "Concert Rock", Description = "Cel mai tare concert rock.", Date = DateTime.UtcNow.AddDays(10), Capacity = 1000, VenueId = venue2.Id },
+                new Event { Title = "Conferinta de IT", Description = "Ultimele trenduri in AI.", Date = DateTime.UtcNow.AddDays(20), Capacity = 500, VenueId = venue1.Id },
+                new Event { Title = "Standup Comedy", Description = "Seara de ras garantat.", Date = DateTime.UtcNow.AddDays(5), Capacity = 200, VenueId = venue1.Id }
+            );
+            await dbContext.SaveChangesAsync();
+        }
+    }
 }
 
 if (app.Environment.IsDevelopment())
