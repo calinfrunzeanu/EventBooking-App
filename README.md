@@ -1,18 +1,18 @@
-# Event Booking App 🎟️
+# Event Booking App
 
 O aplicatie web Full-Stack pentru gestiunea evenimentelor si a locatiilor, construita cu .NET Web API si React. Proiect realizat pentru cursul de Proiectarea Aplicatiilor Web (DAW).
 
-## 🛠️ Tehnologii Folosite
+## Tehnologii Folosite
 * **Backend:** C#, ASP.NET Core Web API, Entity Framework Core, SQL Server, JWT Auth.
 * **Frontend:** React, TypeScript, Vite, React Router, Axios.
 
-## ✨ Functionalitati
+## Functionalitati
 * **Sistem de conturi:** Inregistrare si Autentificare bazata pe JWT.
 * **Roluri:** Protectie pe rute (Admin / User).
 * **Gestiune Evenimente:** Creare, editare, stergere si vizualizare evenimente (CRUD complet).
 * **Gestionare Erori:** Middleware global pentru prinderea exceptiilor pe backend.
 
-## 🚀 Cum sa rulezi proiectul local
+## Cum sa rulezi proiectul local
 
 ### Cerinte:
 * [.NET 8 SDK](https://dotnet.microsoft.com/)
@@ -38,10 +38,17 @@ npm install
 npm run dev
 ```
 
-## 🔑 Conturi de Test (Seed Data)
+## Conturi de Test (Seed Data)
 Baza de date este populata automat cu un cont de administrator la prima rulare:
 * **Email Admin:** `admin@eventbooking.com`
 * **Parola:** `Admin123!`
 
-## 📸 Capturi de ecran
-*(Aici adaugi 1-2 imagini cu aplicatia ta)*
+## Capturi de ecran
+
+![Lista de evenimente initiala](./resurse/Screenshot_12-6-2026_203247_localhost.jpeg)
+
+![Adaugare eveniment](./resurse/Screenshot_12-6-2026_203447_localhost.jpeg)
+
+![Lista de evenimente finalaa](./resurse/Screenshot_12-6-2026_20361_localhost.jpeg)
+
+![Logs-uri API](./resurse/Screenshot_12-6-2026_204332_localhost.jpeg)
