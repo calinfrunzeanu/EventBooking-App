@@ -4,11 +4,12 @@ import api from '../../services/api';
 
 export default function CreateEvent() {
   const [title, setTitle] = useState('');
-   const [date, setDate] = useState('');
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
   const [capacity, setCapacity] = useState('');
   const [venueId, setVenueId] = useState('');
   const [venues, setVenues] = useState<any[]>([]);
-    const [eroare, setEroare] = useState('');
+  const [eroare, setEroare] = useState('');
   const nav = useNavigate();
 
   useEffect(() => {
@@ -25,29 +26,29 @@ export default function CreateEvent() {
 
   const handleSave = async (e: any) => {
     e.preventDefault();
-      setEroare('');
+    setEroare('');
 
-     if (title == '') {
+    if (title == '') {
         setEroare('Ai uitat titlul');
-      return;
-     }
+        return;
+    }
     if (date == '') {
        setEroare('Pune data');
-     return;
+       return;
     }
-     if (capacity == '') {
+    if (capacity == '') {
       setEroare('Pune un numar la capacitate');
       return;
-     }
-      if (venueId == '') {
+    }
+    if (venueId == '') {
         setEroare('Alege o locatie');
         return;
-      }
+    }
 
     try {
       await api.post('/events', {
         title: title,
-        description: 'Descriere simpla',
+        description: description,
         date: date,
         capacity: parseInt(capacity),
         venueId: parseInt(venueId)
@@ -69,6 +70,10 @@ export default function CreateEvent() {
          <p>
            Titlu: <br/>
            <input type="text" value={title} onChange={e => setTitle(e.target.value)} />
+         </p>
+         <p>
+           Descriere: <br/>
+           <textarea value={description} onChange={e => setDescription(e.target.value)} />
          </p>
          <p>
            Data: <br/>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import api from '../../services/api';
 
 export default function Register() {
   const [firstName, setFirstName] = useState('');
@@ -31,20 +32,16 @@ export default function Register() {
      }
 
     try {
-      const res = await fetch('http://localhost:5198/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName, lastName, email, password })
+      await api.post('/auth/register', {
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName
       });
-
-      if (!res.ok) {
-         setEroare('Eroare la inregistrare. Poate emailul exista deja.');
-         return;
-      }
 
       nav('/login');
     } catch (err) {
-       setEroare('Eroare conexiune server');
+       setEroare('Eroare la inregistrare sau conexiune server');
     }
   };
 
