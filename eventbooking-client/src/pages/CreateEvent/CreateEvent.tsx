@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import api from '../../services/api';
 
 export default function CreateEvent() {
   const [title, setTitle] = useState('');
@@ -11,10 +12,15 @@ export default function CreateEvent() {
   const nav = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5198/api/venues')
-     .then(res => res.json())
-     .then(data => setVenues(data))
-     .catch(e => console.log(e));
+    const fetchVenues = async () => {
+        try {
+            const res = await api.get('/venues');
+            setVenues(res.data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    fetchVenues();
   }, []);
 
   const handleSave = async (e: any) => {
@@ -39,30 +45,17 @@ export default function CreateEvent() {
       }
 
     try {
-      const token = localStorage.getItem('token');
-      const req = await fetch('http://localhost:5198/api/events', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-           'Authorization': 'Bearer ' + token
-        },
-        body: JSON.stringify({
-          title: title,
-          description: 'Descriere simpla',
-          date: date,
-          capacity: parseInt(capacity),
-          venueId: parseInt(venueId)
-        })
+      await api.post('/events', {
+        title: title,
+        description: 'Descriere simpla',
+        date: date,
+        capacity: parseInt(capacity),
+        venueId: parseInt(venueId)
       });
-
-      if (!req.ok) {
-         setEroare('Eroare la salvare. Esti admin?');
-         return;
-      }
 
       nav('/events');
     } catch (err) {
-       setEroare('Eroare conexiune server');
+       setEroare('Eroare la salvare. Esti admin sau conexiune esuata?');
     }
   };
 

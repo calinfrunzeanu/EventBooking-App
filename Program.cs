@@ -118,6 +118,9 @@ app.UseHttpsRedirection();
 app.UseCors("AllowReactApp");
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<EventBooking.API.Middlewares.ExceptionMiddleware>();
+
 app.MapControllers();
 
 app.Run();

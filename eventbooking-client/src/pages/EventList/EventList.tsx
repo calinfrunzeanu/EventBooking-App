@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react';
+import api from '../../services/api';
 
 export default function EventList() {
     const [events, setEvents] = useState<any[]>([]);
     const [eroare, setEroare] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:5198/api/events')
-        .then(res => res.json())
-        .then(data => setEvents(data))
-        .catch(e => setEroare('Nu se pot incarca evenimentele'));
+        const fetchEvents = async () => {
+            try {
+                const res = await api.get('/events');
+                setEvents(res.data);
+            } catch (e) {
+                setEroare('Nu se pot incarca evenimentele');
+            }
+        };
+        fetchEvents();
     }, []);
 
     return (

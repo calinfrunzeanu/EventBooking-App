@@ -82,5 +82,38 @@ namespace EventBooking.API.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = createdDto.Id }, createdDto);
         }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateEventDto dto)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var eventEntity = await _context.Events.FindAsync(id);
+            if (eventEntity == null) return NotFound(new { error = "Eveniment negasit" });
+
+            eventEntity.Title = dto.Title;
+            eventEntity.Description = dto.Description;
+            eventEntity.Date = dto.Date;
+            eventEntity.Capacity = dto.Capacity;
+            eventEntity.VenueId = dto.VenueId;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var eventEntity = await _context.Events.FindAsync(id);
+            if (eventEntity == null) return NotFound(new { error = "Eveniment negasit" });
+
+            _context.Events.Remove(eventEntity);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
